@@ -99,6 +99,29 @@ O(log n)은 이진탐색이라고 하며, O(1) 다음으로 가장 시간복잡�
 
 <br>
 
+## 객체와 배열의 성능
+
+### 객체
+* 추가, 제거, 키에 접근 -> O(1)
+* 속성값 조회 -> O(n)
+* `Object.keys`, `Object.values`, `Object.entries`    
+  -> O(n)   
+  : 배열을 만드는 과정
+* `hasOwnProperty` -> O(1)
+
+<br>
+
+### 배열
+* 접근 -> O(1) : 인덱스로 바로 접근
+* 조회 -> O(n)
+* 추가, 제거 -> 앞 : O(n) / 뒤 : O(1)   
+  : `pop`, `push` 가 `shift`, `unshift` 보다 빠르다. 배열의 앞이 변경되면 뒤에 이어진 인덱스 값을 변경해줘야하기 때문이다.
+* `concat`, `slice`, `splice` -> O(n)
+* `sort` -> O(n*logN)
+* 고차함수 -> O(n)
+  
+<br>
+
 ---
  이제 Big O 표기법을 기준으로 코드의 효율성을 논할 수 있다. 시간복잡도와 공간복잡도의 차이를 분석하여 로직 간의 좋고 나쁨을 비교할 수 있는 척도로 사용된다.   
  더보기 : [그래프로 BigO 복잡도 보기](https://www.bigocheatsheet.com/)
