@@ -15,8 +15,8 @@ javascript로 알고리즘 이해하기!
 
 |기간|내용|
 |:---:|---|
-5.23 ~ 5.29|SECTION1 ~ SECTION6 (기본개념)
-5.30 ~ 6.5|SECTION7 ~ SECTION9 (재귀)
+7.7 ~ 7.14|SECTION1 ~ SECTION6 (기본개념)
+7.15 ~ 7.21|SECTION7 ~ SECTION9 (재귀)
 6.6 ~ 6.12|SECTION10 (검색 알고리즘)
 6.13 ~ 6.19|SECTION18 ~ SECTION19 (단일 연결 리스트)
 6.20 ~ 6.26|SECTION21 (스택, 큐)
