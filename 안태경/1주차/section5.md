@@ -18,15 +18,19 @@
 - 자바스크립트의 객체를 사용하여 다양한 값과 빈도를 수집
 - 중첩된 루프나 n의 제곱 시간을 사용하는 것을 피할 수 있음
 
+---
+
 **문제 1)** </br>
 2개의 배열을 허용하는 same이라는 함수를 작성하세요. 배열의 모든 값의 제곱에 해당하는 값이 두 번째 배열에 모두 가지면 참을 반환해야 합니다. (순서무관)
 
-**예시)** </br>
-same([1,2,3]), [4,1,9]) // true </br>
-same([1,2,3]), [1,9]) // false </br>
+**예시)**
+```js
+same([1,2,3]), [4,1,9]) // true
+same([1,2,3]), [1,9]) // false
 same([1,2,1]), [4,4,91) // false (must be same frequency)
+```
 
-**답안 1)** </br>
+**답안 1-1)** </br>
 A Navie Solution 중첩루프 사용 </br>
 (for문 * indexOf메서드, 시간복잡도 = Q(n^2))
 ```javascript
@@ -51,7 +55,7 @@ A Navie Solution 중첩루프 사용 </br>
     // splice() 메서드는 배열의 기존 요소를 삭제 또는 교체하거나 새 요소를 추가하여 배열의 내용을 변경합니다.
 ```
 
-**답안 2)** </br>
+**답안 1-2)** </br>
 Refactored 빈도 카운터 패턴 사용 (시간복잡도 = Q(n))
 ```javascript
     function same(arr1, arr2){
@@ -85,3 +89,51 @@ Refactored 빈도 카운터 패턴 사용 (시간복잡도 = Q(n))
 
 ```
 위와 같이 찍어보면 중간에 console.log를 이용하여 값을 비교해 보면 각 값이 해당 배열에서 몇 번 나타나는지 알려주는 객체가 나타난다.
+
+---
+
+**문제 2)** Frequency Counter - vaildAnagram </br>
+Given two strings, write a function to determine if the second string is an anagram of the first. An anagram is a word, phrase, or name formed by rearranging the letters of another, such as cinema, formed from iceman.
+
+Note: You may assume the string contains only lowercase alphabets.
+
+Time Complexity - O(n)
+
+**예시)**
+```js
+validAnagram('', '') // true
+validAnagram('aaz', 'zza') // false
+validAnagram('anagram', 'nagaram') // true
+validAnagram("rat","car") // false) // false
+validAnagram('awesome', 'awesom') // false
+validAnagram('amanaplanacanalpanama', 'acanalmanplanpamana') // false
+validAnagram('qwerty', 'qeywrt') // true
+validAnagram('texttwisttime', 'timetwisttext') // true
+```
+
+**답안 2)** </br>
+```javascript
+    function vaildAnagram(first, second){        
+        if(first.length !== second.length){
+            return false;
+        }
+        const lookup = {};
+        
+        for (let i=0; i<first.length; i++){
+            let letter = first[i];
+            // 만약 letter가 존재하면 증가시키고, 아니라면 1을 세팅
+            lookup[letter] ? lookup[letter] += 1 : lookup[letter] = 1;
+        }
+
+        for (let i=0; i<second.length; i++){
+            letter = second[i];
+            // letter를 찾을 수 없거나, 0이라면 false
+            if (!lookup[letter]){
+                return false;
+            } else{
+                lookup[letter] -= 1;
+            }
+        }
+        return true;
+    }
+```
