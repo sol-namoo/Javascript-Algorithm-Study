@@ -1,5 +1,5 @@
 ## 섹션5 : 문제 해결 패턴
----
+
 ### How do you improve?
 1. 문제를 해결하기 위한 계획 (섹션4)
 2. 일반적인 문제 해결 패턴 습득 (섹션5)
@@ -14,11 +14,12 @@
 - Backtracking
 - ...
 
-#### Frequency Counter
+---
+
+### Frequency Counter
+
 - 자바스크립트의 객체를 사용하여 다양한 값과 빈도를 수집
 - 중첩된 루프나 n의 제곱 시간을 사용하는 것을 피할 수 있음
-
----
 
 **문제 1)** </br>
 2개의 배열을 허용하는 same이라는 함수를 작성하세요. 배열의 모든 값의 제곱에 해당하는 값이 두 번째 배열에 모두 가지면 참을 반환해야 합니다. (순서무관)
@@ -27,7 +28,7 @@
 ```js
 same([1,2,3]), [4,1,9]) // true
 same([1,2,3]), [1,9]) // false
-same([1,2,1]), [4,4,91) // false (must be same frequency)
+same([1,2,1]), [4,4,9]) // false (must be same frequency)
 ```
 
 **답안 1-1)** </br>
@@ -85,10 +86,8 @@ Refactored 빈도 카운터 패턴 사용 (시간복잡도 = Q(n))
         }
         return true;
     }
-
-
 ```
-위와 같이 찍어보면 중간에 console.log를 이용하여 값을 비교해 보면 각 값이 해당 배열에서 몇 번 나타나는지 알려주는 객체가 나타난다.
+위와 같이 중간에 console.log를 이용하여 값을 비교해 보면 각 값이 해당 배열에서 몇 번 나타나는지 알려주는 객체가 나타난다.
 
 ---
 
@@ -137,3 +136,82 @@ validAnagram('texttwisttime', 'timetwisttext') // true
         return true;
     }
 ```
+
+---
+
+### Multiple pointers
+
+- 인덱스나 위치에 해당하는 포인터나 값을 만든 후 특정 조건에 따라 중간 지점에서부터 시작 지점이나 끝 지점이나 양쪽 지점을 향해 이동
+
+**문제 1)** <i>양쪽지점으로 설정</i></br>
+오름차순으로 정렬된 배열을 인자로 받는 sumZero라는 함수를 작성하세요. 이 함수는 합계가 0인 첫 번째 쌍을 찾아야 합니다.
+합계가 0인 쌍을 배열을 반환하거나 쌍이 존재하지 않는다면 undefined를 반환하세요.
+
+**예시)**
+```js
+sumZeor([-3,-2,-1,0,1,2,3]) // [-3,3]
+sumZeor([-2,0,1,3]) // undefined
+sumZeor([1,2,3]) // undefined
+```
+
+**답안 1-1)** </br>
+A Navie Solution <i>중첩루프 사용</i> </br>
+(for문 * for문 , 시간복잡도 = Q(n^2), 공간복잡도 = O(1))
+```javascript
+    function sumZero(arr){
+        for(let i=0; i<arr.length; i++){
+            for(let j=1; j<arr.length; j++){
+                if(arr[i] + arr[j] === 0){
+                    return [arr[i], arr[j]];
+                }
+            }
+        }
+    }    
+```
+
+**답안 1-2)** </br>
+Refactored <i>다중 포인터 패턴 사용</i> </br>
+(시간복잡도 = Q(n), 공간복잡도 = Q(1))
+```javascript
+    function sumZero(arr){
+        let left = 0;
+        let right = arr.length-1;
+        while(left < right){
+            let sum = arr[left] + arr[right];
+            if(sum === 0){
+                return [arr[left], arr[right]];
+            }else if(sum > 0){
+                right--;
+            }else{
+                left++;
+            }
+        }        
+    }    
+```
+
+---
+
+**문제 2)** Multiple Pointers - countUniqueValues </br>
+Implement a function called countUniqueValues, which accepts a sorted array, and counts the unique values in the array. There can be negative numbers in the array, but it will always be sorted.
+
+Time Complexity - O(n)
+
+Space Complexity - O(n)
+
+* You must do this with constant or O(1) space and O(n) time.
+
+
+**예시)**
+```js
+countUniqueValues([1,1,1,1,1,2]) // 2
+countUniqueValues([1,2,3,4,4,4,7,7,12,12,13]) // 7
+countUniqueValues([]) // 0
+countUniqueValues([-2,-1,-1,0,1]) // 4
+```
+
+**답안 2)** </br>
+```javascript
+    
+```
+
+
