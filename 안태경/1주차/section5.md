@@ -64,23 +64,23 @@ Refactored 빈도 카운터 패턴 사용 (시간복잡도 = Q(n))
         if(arr1.length !== arr2.length){
             return false;
         }
-        let frequencyCouner1 = {};
-        let frequencyCouner2 = {};
+        let frequencyCounter1 = {};
+        let frequencyCounter2 = {};
         // 각 배열에 한 번씩 개별적으로 루프 적용
         for(let val of arr1){
             // arr1의 각 val마다 frequencyCouner1에 1을 더하거나, 이미 포함되어 있다면 1로 초기화
-            frequencyCouner1[val] = (frequencyCouner1[val] || 0) + 1
+            frequencyCounter1[val] = (frequencyCounter1[val] || 0) + 1
         }
         for(let val of arr2){
-            frequencyCouner2[val] = (frequencyCouner2[val] || 0) + 1
+            frequencyCounter2[val] = (frequencyCounter2[val] || 0) + 1
         }
-        // console.log(frequencyCouner1)
-        // console.log(frequencyCouner2)
-        for(let key in frequencyCouner1){
-            if (!(key**2 in frequencyCouner2)){
+        // console.log(frequencyCounter1)
+        // console.log(frequencyCounter2)
+        for(let key in frequencyCounter1){
+            if (!(key**2 in frequencyCounter2)){
                 return false;
             }
-            if(frequencyCouner2[key**2] !== frequencyCouner1[key]){
+            if(frequencyCounter2[key**2] !== frequencyCounter1[key]){
                 return false;
             } 
         }
