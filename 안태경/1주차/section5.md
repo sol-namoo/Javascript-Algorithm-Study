@@ -135,6 +135,9 @@ validAnagram('texttwisttime', 'timetwisttext') // true
         }
         return true;
     }
+
+    // {a: 0, n: 0, g: 0, r: 0, m: 0,s:1}
+    validAnagram('anagrams', 'nagaramm')
 ```
 
 ---
@@ -211,7 +214,141 @@ countUniqueValues([-2,-1,-1,0,1]) // 4
 
 **답안 2)** </br>
 ```javascript
-    
+    function countUniqueValues(arr){
+        if(arr.length === 0) return 0;
+        var i=0;
+        for(var j=1; j<arr.lenght; j++){
+            if(arr[i] !== arr[j]){
+                i++;
+                arr[i] = arr[j];
+            }
+        }
+        return i+1;
+    }
 ```
 
+---
 
+### Sliding Window
+- 배열이나 문자열과 같은 일련의 데이터를 입력하거나, 특정방식으로 연속적인 해당 데이터의 하위 집합을 찾는 경우에 유용
+
+**문제 1)**</br>
+정수 배열과 n이라는 수를 취하는 maxSubarraySum이라는 함수를 작성하세요. 두번째 인자인 숫자 n을 전달하면 함수는 해당 배열의 n번 연속된 요소의 가장 큰 합계를 계산합니다.
+
+**예시)**
+```js
+function maxSubarraySum([1,2,5,2,8,1,5], 2) // 10
+function maxSubarraySum([1,2,5,2,8,1,5], 4) // 17
+function maxSubarraySum([4,2,1,6], 1) // 6
+function maxSubarraySum([4,2,1,6,2], 4) // 13
+function maxSubarraySum([], 4) // null
+```
+
+**답안 1-1)** </br>
+A Navie Solution <i>중첩루프 사용</i> </br>
+(for문 * for문 , 시간복잡도 = Q(n^2))
+```javascript
+    function maxSubarraySum(arr, num) {
+        if ( num > arr.length){
+            return null;
+        }
+        var max = -Infinity;
+        for (let i = 0; i < arr.length - num + 1; i ++){
+            temp = 0;
+                for (let j = 0; j < num; j++){
+                    temp += arr[i + j];
+                }
+            if (temp > max) {
+                 max = temp;
+            }
+        }
+    return max;
+    }
+
+    maxSubarraySum([2,6,9,2,1,8,5,6,3],3)
+```
+
+**답안 1-2)** </br>
+Refactored <i>기준점 간 이동 배열 패턴 사용</i> </br>
+(시간복잡도 = Q(n))
+```javascript
+    function maxSubarraySum(arr, num){
+        let maxSum = 0;
+        let tempSum = 0;
+        if (arr.length < num) return null;
+        for (let i = 0; i < num; i++) {
+            maxSum += arr[i];
+        }
+        tempSum = maxSum;
+        for (let i = num; i < arr.length; i++) {
+            tempSum = tempSum - arr[i - num] + arr[i];
+            maxSum = Math.max(maxSum, tempSum);
+        }
+        return maxSum;
+    }
+
+maxSubarraySum([2,6,9,2,1,8,5,6,3],3)
+```
+---
+
+### Divide and Conquer
+- 이 알고리즘은 주로 배열이나 문자열과 같은 큰 규모의 데이터셋을 처리
+- 데이터셋을 작은 단위로 나누거나 데이터의 서브셋을 반복하는 과정에서 사용됨
+- 이진 탐색, 병합 정렬, 퀵 정렬 , 분할 정복 알고리즘 등
+
+**문제 1)** </br>
+입력된 search라는 함수는 값을 취하고 해당 값이 있는 위치(index)를 반환합니다. 해당하는 값이 없으면 -1를 리턴합니다. (배열은 항상 오름차순 정렬)
+
+**예시)**
+```js
+function search([1,2,3,4,5,6], 4) // 3
+function search([1,2,3,4,5,6], 6) // 5
+function search([1,2,3,4,5,6], 11) // -1
+```
+
+**답안 1-1)** </br>
+A Navie Solution <i>루프 사용</i> </br>
+(시간복잡도 = Q(n))
+```javascript
+    function search(arr, val) {
+        for(let i=0; i<arr.length; i++){
+            if(arr[i] === val){
+                return i;
+            }
+        }
+        return -1;
+    }
+```
+
+**답안 1-2)** </br>
+Refactored <i>이진 탐색 사용</i> </br>
+(시간복잡도 = Q(logN))
+```javascript
+    function maxSubarraySum(array, val){
+        let min = 0;
+        let max = array.length - 1;
+        while (min <= max){
+            let middle = Math.floor((min + max) / 2);
+            let currentElement = array[middle];
+
+            if (array[middle] < val){
+                min = middle +1;
+            }
+            else if (array[middle] > val){
+                max = middle -1;
+            }
+            else{
+                return middle;
+            }
+        }
+        return -1;
+    }
+    /*
+* 작동원리 :
+* 만약 다음과 같이 엄청 긴 배열이 있고,
+* [1,2,6,7,8,10,15,19,20,22,23, ..., 89,95,100,101]
+* 찾는 숫자가 100 이라면 답안 1-1)의 경우에는 앞에서부터 찾아나가므로 효율성이 떨어진다.
+* 답안 1-2) 알고리즘이 적용된다면 절반을 잘라 (약 50이라고 치자) 그것보다 해당 숫자가 크다면 절반 아랫쪽 숫자는 전부 무시한다.
+* 그 후 나머지 숫자 중 다시 절반에 해당되는 숫자를 골라 계속 반복 진행한다.
+*/
+```
