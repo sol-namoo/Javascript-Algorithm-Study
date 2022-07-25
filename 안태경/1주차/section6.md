@@ -1,4 +1,6 @@
-## 03. Frequency Counter - sameFrequency
+## 섹션6 : 100% 선택적 도전 과제
+
+### 연습 03. Frequency Counter - sameFrequency
 
 Write a function called sameFrequency. Given two positive integers, find out if the two numbers have the same frequency of digits.
 
@@ -77,7 +79,7 @@ function sameFrequency(num1, num2) {
 
 ---
 
-## 04. Frequency Counter / Multiple Pointers - areThereDuplicates
+### 연습 04. Frequency Counter / Multiple Pointers - areThereDuplicates
 
 Implement a function called, areThereDuplicates which accepts a variable number of arguments, and checks whether there are any duplicates among the arguments passed in. You can solve this using the frequency counter pattern OR the multiple pointers pattern.
 
@@ -141,7 +143,7 @@ function areThereDuplicates() {
 
 ---
 
-## 05. Multiple Pointers - averagePair
+### 연습 05. Multiple Pointers - averagePair
 
 Write a function called averagePair. Given a sorted array of integers and a target average, determine if there is a pair of values in the array where the average of the pair equals the target average. There may be more than one pair that matches the average target.
 
@@ -178,7 +180,7 @@ function averagePair(arr, num) {
 
 ---
 
-## 06. Multiple Pointers - isSubsequence
+### 연습 06. Multiple Pointers - isSubsequence
 
 Write a function called isSubsequence which takes in two strings and checks whether the characters in the first string form a subsequence of the characters in the second string. In other words, the function should check whether the characters in the first string appear somewhere in the second string, without their order changing.
 
@@ -232,7 +234,7 @@ function isSubsequence(str1, str2) {
 
 ---
 
-## 07. Sliding Window - maxSubarraySum
+### 연습 07. Sliding Window - maxSubarraySum
 
 Given an array of integers and a number, write a function called maxSubarraySum, which finds the maximum sum of a subarray with the length of the number passed to the function.
 
@@ -286,7 +288,7 @@ function maxSubarraySum(arr, num) {
 
 ---
 
-## 08. Sliding Window - minSubArrayLen (보류)
+### 연습 08. Sliding Window - minSubArrayLen (보류)
 
 Write a function called minSubArrayLen which accepts two parameters - an array of positive integers and a positive integer.
 
@@ -343,7 +345,7 @@ function minSubArrayLen(nums, sum) {
 
 ---
 
-## 09. Sliding Window - findLongestSubstring (보류)
+### 연습 09. Sliding Window - findLongestSubstring (보류)
 
 Write a function called findLongestSubstring, which accepts a string and returns the length of the longest substring with all distinct characters.
 
