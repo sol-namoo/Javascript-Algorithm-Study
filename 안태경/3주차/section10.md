@@ -61,7 +61,7 @@ linearSearch([34, 51, 1, 2, 3, 45, 56, 687], 100);
 
 ---
 
-### Binary Search Pseudocode
+Binary Search Pseudocode
 
 - This function accpets a sorted array and a value
 - Create a left pointer at the start of the array, and a right pointer at the end of the array
@@ -71,6 +71,8 @@ linearSearch([34, 51, 1, 2, 3, 45, 56, 687], 100);
   - If the value is too small, move the left pointer up
   - If the value is too large, move the right pointer down
 - ## If you never find the value, return -1
+
+---
 
 ### 연습 25. Binary Search Exercise
 
@@ -143,6 +145,70 @@ function binarySearch(arr, elem) {
 binarySearch([2, 5, 6, 9, 13, 15, 28, 30], 103);
 ```
 
+---
+
 ### 이진 검색 빅오(big O)
 
+- O(log n) : Worst and Average Case
+- O(1) : Best Case
+
 <img src="./binary_bigO.png">
+
+---
+
+### 나이브 문자열 검색 (Navie String Search)
+
+- 긴 문자열에서 짧은 문자열이 등장하는 횟수를 센다고 가정해 보자.
+- 간단한 접근법 중 하나는 문자쌍을 하나씩 확인하는 것
+- 예를 들어
+
+```js
+// 긴 문자열
+"wowomgzomg"
+// 짧은 문자열 (찾는 문자열)
+"omg"
+
+// 하나씩 확인
+1. wowomgzomg
+   omg
+2. wowomgzomg
+    omg
+3. wowomgzomg
+     omg
+4. wowomgzomg
+      omg
+
+// ... 이런식으로 이어나가면서 찾는다.
+
+```
+
+---
+
+Navie String Search 수도코드
+
+- StringSearch 라는 문자열 2개를 사용하는 함수를 정의
+- Loop over the longer string
+- Loop over the shoter string
+- If the characters don't match, break out of the inner loop
+- If the characters do match, keep going
+- If you complete the inner loop and find a match, increment the count of matches
+- Return count
+
+---
+
+The solution is...
+
+```js
+function naiveSearch(long, short) {
+  var count = 0;
+  for (var i = 0; i < long.length; i++) {
+    for (var j = 0; j < short.length; j++) {
+      if (short[j] !== long[i + j]) break; // j의 n+1번째 문자가 i의 n+1번째 문자와 같은지 비교
+      if (j === short.length - 1) count++; // short를 끝까지 다 가면 카운트
+    }
+  }
+  return count;
+}
+
+naiveSearch('lorie loled', 'lol');
+```
