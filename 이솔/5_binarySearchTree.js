@@ -53,6 +53,22 @@ class BinarySearchTree {
             
         }
     }
+    /*queue(나중에 방문할 곳 목록)에 루트를 넣고 시작한다.
+    LEVEL 별로 노드를 돌면서, 방문한 노드를 visited에 추가하고
+    거기서 child를 발견하면 queue에 추가한다.
+    queue에 노드가 남아 있다면 차례대로 방문하며 visited에 넣는다.
+    */
+    BFS(){
+      let node = this.root, visited = [], queue = [];
+      queue.push(node);
+      while(queue.length){
+        node = queue.shift()
+        visited.push(node)
+        if(node.left) queue.push(node.left)
+        if(node.right) queue.push(node.right)
+      }
+      return visited;
+    }
 }
 
 
